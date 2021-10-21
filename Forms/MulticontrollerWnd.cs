@@ -275,6 +275,8 @@ namespace TTMulti.Forms
             if (!hotkeyRegistered)
             {
                 hotkeyRegistered = Win32.RegisterHotKey(this.Handle, 0, Win32.KeyModifiers.None, (Keys)Properties.Settings.Default.modeKeyCode);
+                hotkeyRegistered = Win32.RegisterHotKey(this.Handle, 0, Win32.KeyModifiers.None, (Keys)Properties.Settings.Default.multiClickKeyCode);
+                hotkeyRegistered = Win32.RegisterHotKey(this.Handle, 0, Win32.KeyModifiers.None, (Keys)Properties.Settings.Default.toggleKeepAliveKeyCode);
             }
 
             return hotkeyRegistered;

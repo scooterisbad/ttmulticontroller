@@ -66,6 +66,19 @@ namespace TTMulti
             Mirror
         }
 
+        private bool multiClick = false;
+        internal bool MultiClick
+        {
+            get { return multiClick; }
+            set
+            {
+                multiClick = value;
+                updateControllerBorders();
+            }
+        }
+
+        private bool listen = true;
+
         public bool ErrorOccurredPostingMessage
         {
             get => ControllerGroups.Any(g => g.LeftController.ErrorOccurredPostingMessage || g.RightController.ErrorOccurredPostingMessage);
@@ -189,31 +202,40 @@ namespace TTMulti
         
         private void updateControllerBorders()
         {
-            if (CurrentMode == ControllerMode.Multi)
+            IEnumerable<ControllerGroup> affectedGroups = Properties.Settings.Default.controlAllGroupsAtOnce
+                       ? (IEnumerable<ControllerGroup>)ControllerGroups : new[] { ControllerGroups[CurrentGroupIndex] };
+
+            Color leftColour = Properties.Settings.Default.leftBorderColour;
+            Color rightColour = Properties.Settings.Default.rightBorderColour;
+            Color mirrorColour = Properties.Settings.Default.mirrorBorderColour;
+            
+            if (MultiClick)
             {
-                IEnumerable<ControllerGroup> affectedGroups = Properties.Settings.Default.controlAllGroupsAtOnce 
-                    ? (IEnumerable<ControllerGroup>)ControllerGroups : new[] { ControllerGroups[CurrentGroupIndex] };
-                
-                foreach (var group in ControllerGroups)
+                mirrorColour = Properties.Settings.Default.mClickMirrorBorderColour;
+                leftColour = Properties.Settings.Default.mClickLeftBorderColour;
+                rightColour = Properties.Settings.Default.mClickRightBorderColour;
+            }
+
+            foreach (var group in ControllerGroups)
+            {
+                if (currentMode == ControllerMode.Multi)
                 {
-                    group.LeftController.BorderColor = Color.LimeGreen;
-                    group.RightController.BorderColor = Color.Green;
-                    
+                    group.LeftController.BorderColor = leftColour;
+                    group.RightController.BorderColor = rightColour;
+
                     group.LeftController.ShowBorder = group.RightController.ShowBorder =
                         showAllBorders || affectedGroups.Contains(group);
 
                     group.LeftController.ShowGroupNumber = group.RightController.ShowGroupNumber =
                         ShowAllBorders || ControllerGroups.Count > 1;
                 }
-            }
-            else
-            {
-                ControllerGroups.ForEach(g =>
+                else
                 {
-                    g.LeftController.BorderColor = g.RightController.BorderColor = Color.Violet;
-                    g.LeftController.ShowBorder = g.RightController.ShowBorder = isActive;
-                    g.LeftController.ShowGroupNumber = g.RightController.ShowGroupNumber = ControllerGroups.Count > 1;
-                });
+                    group.LeftController.BorderColor = mirrorColour;
+                    group.RightController.BorderColor = mirrorColour;
+                    group.LeftController.ShowBorder = group.RightController.ShowBorder = (showAllBorders || affectedGroups.Contains(group)) && isActive;
+                    group.LeftController.ShowGroupNumber = group.RightController.ShowGroupNumber = showAllBorders || ControllerGroups.Count > 1;
+                }
             }
         }
 
@@ -264,63 +286,84 @@ namespace TTMulti
                     updateControllerBorders();
                 }
             }
+            else if (key == (Keys)Properties.Settings.Default.multiClickKeyCode)
+            {
+                if (msg == (uint)Win32.WM.HOTKEY || msg == (uint)Win32.WM.KEYDOWN)
+                {
+                    MultiClick = !MultiClick;
+                }
+            }
+            else if (key == (Keys)Properties.Settings.Default.toggleKeepAliveKeyCode)
+            {
+                if (msg == (uint)Win32.WM.HOTKEY || msg == (uint)Win32.WM.KEYDOWN)
+                {
+                    Properties.Settings.Default.disableKeepAlive = !Properties.Settings.Default.disableKeepAlive;
+                }
+            }
             else if (isActive)
             {
-                if (currentMode == ControllerMode.Multi)
+                if (!Properties.Settings.Default.controlAllGroupsAtOnce
+                           && ControllerGroups.Count > 1
+                           && (key >= Keys.D0 && key <= Keys.D9
+                           || key >= Keys.NumPad0 && key <= Keys.NumPad9))
                 {
-                    if (!Properties.Settings.Default.controlAllGroupsAtOnce 
-                        && ControllerGroups.Count > 1
-                        && (key >= Keys.D0 && key <= Keys.D9
-                        || key >= Keys.NumPad0 && key <= Keys.NumPad9))
+                    int index = 0;
+
+                    if (key >= Keys.D0 && key <= Keys.D9)
                     {
-                        int index = 0;
-
-                        if (key >= Keys.D0 && key <= Keys.D9)
-                        {
-                            index = 9 - (Keys.D9 - key);
-                        }
-                        else
-                        {
-                            index = 9 - (Keys.NumPad9 - key);
-                        }
-
-                        index = index == 0 ? 9 : index - 1;
-
-                        if (ControllerGroups.Count > index)
-                        {
-                            CurrentGroupIndex = index;
-                            GroupsChanged?.Invoke(this, EventArgs.Empty);
-                        }
+                        index = 9 - (Keys.D9 - key);
                     }
                     else
                     {
-                        if (leftKeys.ContainsKey(key))
-                        {
-                            var affectedControllers = Properties.Settings.Default.controlAllGroupsAtOnce ?
-                                ControllerGroups.Select(c => c.LeftController) : new[] { LeftController };
+                        index = 9 - (Keys.NumPad9 - key);
+                    }
 
-                            foreach (Keys actualKey in leftKeys[key])
-                                affectedControllers.ToList().ForEach(c => c.PostMessage(msg, (IntPtr)actualKey, lParam));
-                        }
+                    index = index == 0 ? 9 : index - 1;
 
-                        if (rightKeys.ContainsKey(key))
-                        {
-                            var affectedControllers = Properties.Settings.Default.controlAllGroupsAtOnce ?
-                                ControllerGroups.Select(c => c.RightController) : new[] { RightController };
+                    if (ControllerGroups.Count > index)
+                    {
+                        CurrentGroupIndex = index;
+                        GroupsChanged?.Invoke(this, EventArgs.Empty);
+                    }
+                }
+                else if (currentMode == ControllerMode.Multi)
+                {
+                    if (leftKeys.ContainsKey(key))
+                    {
+                        var affectedControllers = Properties.Settings.Default.controlAllGroupsAtOnce ?
+                            ControllerGroups.Select(c => c.LeftController) : new[] { LeftController };
 
-                            foreach (Keys actualKey in rightKeys[key])
-                                affectedControllers.ToList().ForEach(c => c.PostMessage(msg, (IntPtr)actualKey, lParam));
-                        }
+                        foreach (Keys actualKey in leftKeys[key])
+                            affectedControllers.ToList().ForEach(c => c.PostMessage(msg, (IntPtr)actualKey, lParam));
+                    }
+
+                    if (rightKeys.ContainsKey(key))
+                    {
+                        var affectedControllers = Properties.Settings.Default.controlAllGroupsAtOnce ?
+                            ControllerGroups.Select(c => c.RightController) : new[] { RightController };
+
+                        foreach (Keys actualKey in rightKeys[key])
+                            affectedControllers.ToList().ForEach(c => c.PostMessage(msg, (IntPtr)actualKey, lParam));
                     }
                 }
                 else
                 {
                     if (currentMode == ControllerMode.Mirror)
                     {
-                        foreach (var group in ControllerGroups)
+                        if (Properties.Settings.Default.controlAllGroupsAtOnce)
                         {
-                            group.LeftController.PostMessage(msg, wParam, lParam);
-                            group.RightController.PostMessage(msg, wParam, lParam);
+                            foreach (var group in ControllerGroups)
+                            {
+                                group.LeftController.PostMessage(msg, wParam, lParam);
+                                group.RightController.PostMessage(msg, wParam, lParam);
+                            }
+                        }
+                        else
+                        {
+                            var affectedGroup = ControllerGroups[CurrentGroupIndex];
+
+                            affectedGroup.LeftController.PostMessage(msg, wParam, lParam);
+                            affectedGroup.RightController.PostMessage(msg, wParam, lParam);
                         }
                     }
                 }
@@ -329,6 +372,65 @@ namespace TTMulti
             }
 
             return shouldDiscardInput;
+        }
+
+        private void DoMultiClick(Point[] pointsToClick, IntPtr clickHwnd)
+        {
+            // prevents a stack overflow
+            listen = false;
+            // 99% of the time the first window wouldn't be clicked because the mouse is still held down
+            Win32.mouse_event((uint)Win32.MOUSEEVENTF.LEFTUP, 0, 0, 0, 0);
+            for (int i = 0; i < pointsToClick.Length; i++)
+            {
+                // if there is only 1 window in a ControllerGroup the "second window" will return coords of (0, 0)
+                // click has already been performed by the user, double clicking bad
+                if (pointsToClick[i] == new Point(0, 0) || Win32.WindowFromPoint(pointsToClick[i]) == clickHwnd) { 
+                    continue;
+                }
+                // perform the click, with delay
+                Win32.SetCursorPos(pointsToClick[i].X, pointsToClick[i].Y);
+                Win32.mouse_event((uint)Win32.MOUSEEVENTF.LEFTDOWN, 0, 0, 0, 0);
+                Thread.Sleep((int)Properties.Settings.Default.multiClickDelay);
+                Win32.mouse_event((uint)Win32.MOUSEEVENTF.LEFTUP, 0, 0, 0, 0);
+            }
+            listen = true;
+        }
+
+        private Point[] GetRelPositions(float relX, float relY)
+        {
+            Point[] points;
+            List<ControllerGroup> groups = new List<ControllerGroup>();
+
+            if (Properties.Settings.Default.controlAllGroupsAtOnce)
+            {
+                // 2 windows per ControllerGroup
+                points = new Point[ControllerGroups.Count() * 2];
+                groups = ControllerGroups;
+            }
+            else
+            {
+                points = new Point[2];
+                groups.Add(ControllerGroups[currentGroupIndex]);
+            }
+
+            Win32.RECT rect;
+            int i = 0;
+            foreach (ControllerGroup group in groups)
+            {
+                IntPtr[] hWnds = { group.LeftController.TTWindowHandle, group.RightController.TTWindowHandle };
+                for (int j = 0; j < hWnds.Length; j++)
+                {
+                    // get dimensions of window
+                    Win32.GetClientRect(hWnds[j], out rect);
+                    // calculate where click should be within the window
+                    points[i + j] = new Point((int)(relX * rect.Right), (int)(relY * rect.Bottom));
+                    // translate client coords to full screen coords
+                    Win32.ClientToScreen(hWnds[j], ref points[i + j]);
+                }
+                i += 2;
+            }
+
+            return points;
         }
 
         private void Controller_TTWindowClosed(object sender)
@@ -341,7 +443,41 @@ namespace TTMulti
 
         private void Controller_TTWindowActivated(object sender, IntPtr hWnd)
         {
-            TTWindowActivated?.Invoke(this, EventArgs.Empty);
+            if (MultiClick && 
+                // if the window clicked is not an active window, treat like a normal click
+               (!Properties.Settings.Default.controlAllGroupsAtOnce &&
+                (hWnd == ControllerGroups[currentGroupIndex].LeftController.TTWindowHandle || 
+                hWnd == ControllerGroups[currentGroupIndex].RightController.TTWindowHandle) ||
+                Properties.Settings.Default.controlAllGroupsAtOnce))
+            {
+                if (listen)
+                {
+                    Point initialClick = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+
+                    // get the position of click within the client
+                    Point clientClick = initialClick;
+                    Win32.ScreenToClient(hWnd, ref clientClick);
+
+                    // get the dimensions of the window clicked
+                    Win32.RECT clientRect;
+                    Win32.GetClientRect(hWnd, out clientRect);
+
+                    // values between 0 and 1 - relative location of click within the client
+                    float relX = (float)clientClick.X / (float)clientRect.Right;
+                    float relY = (float)clientClick.Y / (float)clientRect.Bottom;
+
+                    Point[] pointsToClick = GetRelPositions(relX, relY);
+                    DoMultiClick(pointsToClick, hWnd);
+
+                    Win32.SetCursorPos(initialClick.X, initialClick.Y);
+
+                    ShouldActivate?.Invoke(this, EventArgs.Empty);
+                }
+            }
+            else
+            {
+                TTWindowActivated?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private void Controller_TTWindowDeactivated(object sender, IntPtr hWnd)

@@ -12,7 +12,7 @@ namespace TTMulti.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -377,6 +377,114 @@ namespace TTMulti.Properties {
         public string homepageUrl {
             get {
                 return ((string)(this["homepageUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("LimeGreen")]
+        public global::System.Drawing.Color leftBorderColour {
+            get {
+                return ((global::System.Drawing.Color)(this["leftBorderColour"]));
+            }
+            set {
+                this["leftBorderColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Green")]
+        public global::System.Drawing.Color rightBorderColour {
+            get {
+                return ((global::System.Drawing.Color)(this["rightBorderColour"]));
+            }
+            set {
+                this["rightBorderColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Violet")]
+        public global::System.Drawing.Color mirrorBorderColour {
+            get {
+                return ((global::System.Drawing.Color)(this["mirrorBorderColour"]));
+            }
+            set {
+                this["mirrorBorderColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Yellow")]
+        public global::System.Drawing.Color mClickLeftBorderColour {
+            get {
+                return ((global::System.Drawing.Color)(this["mClickLeftBorderColour"]));
+            }
+            set {
+                this["mClickLeftBorderColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("YellowGreen")]
+        public global::System.Drawing.Color mClickRightBorderColour {
+            get {
+                return ((global::System.Drawing.Color)(this["mClickRightBorderColour"]));
+            }
+            set {
+                this["mClickRightBorderColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GreenYellow")]
+        public global::System.Drawing.Color mClickMirrorBorderColour {
+            get {
+                return ((global::System.Drawing.Color)(this["mClickMirrorBorderColour"]));
+            }
+            set {
+                this["mClickMirrorBorderColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int multiClickKeyCode {
+            get {
+                return ((int)(this["multiClickKeyCode"]));
+            }
+            set {
+                this["multiClickKeyCode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public decimal multiClickDelay {
+            get {
+                return ((decimal)(this["multiClickDelay"]));
+            }
+            set {
+                this["multiClickDelay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int toggleKeepAliveKeyCode {
+            get {
+                return ((int)(this["toggleKeepAliveKeyCode"]));
+            }
+            set {
+                this["toggleKeepAliveKeyCode"] = value;
             }
         }
     }

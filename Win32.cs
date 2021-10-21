@@ -15,6 +15,12 @@ namespace TTMulti
         internal static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll")]
+        public static extern void mouse_event(uint dwFlags, int dx, int dy, uint cButtons, uint dwExtraInfo);
+
+        [DllImport("user32.dll")]
+        internal static extern bool SetCursorPos(int x, int y);
+
+        [DllImport("user32.dll")]
         internal static extern IntPtr WindowFromPoint(Point Point);
 
         [DllImport("user32.dll", SetLastError=true)]
@@ -25,6 +31,9 @@ namespace TTMulti
 
         [DllImport("user32.dll")]
         internal static extern bool ClientToScreen(IntPtr hWnd, ref Point lpPoint);
+
+        [DllImport("user32.dll")]
+        internal static extern bool ScreenToClient(IntPtr hWnd, ref Point lpPoint);
 
         [DllImport("user32.dll")]
         internal static extern IntPtr SetCapture(IntPtr hWnd);

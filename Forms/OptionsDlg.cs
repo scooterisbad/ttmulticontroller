@@ -232,5 +232,64 @@ namespace TTMulti.Forms
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.leftBorderColour = colorDialog1.Color;
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.rightBorderColour = colorDialog1.Color;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.mClickLeftBorderColour = colorDialog1.Color;
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.mClickRightBorderColour = colorDialog1.Color;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.mirrorBorderColour = colorDialog1.Color;
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Properties.Settings.Default.mClickMirrorBorderColour = colorDialog1.Color;
+            }
+        }
+
+        // reset border colours
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.leftBorderColour = Color.LimeGreen;
+            Properties.Settings.Default.rightBorderColour = Color.Green;
+            Properties.Settings.Default.mClickLeftBorderColour = Color.Yellow;
+            Properties.Settings.Default.mClickRightBorderColour = Color.YellowGreen;
+            Properties.Settings.Default.mirrorBorderColour = Color.Violet;
+            Properties.Settings.Default.mClickMirrorBorderColour = Color.GreenYellow;
+        }
     }
 }
