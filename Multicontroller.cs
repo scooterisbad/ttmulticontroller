@@ -202,7 +202,7 @@ namespace TTMulti
         
         private void updateControllerBorders()
         {
-            IEnumerable<ControllerGroup> affectedGroups = Properties.Settings.Default.controlAllGroupsAtOnce
+            IEnumerable<ControllerGroup> affectedGroups = Properties.Settings.Default.controlAllGroupsAtOnce || (Properties.Settings.Default.forceMirrorControlAllGroups && CurrentMode == ControllerMode.Mirror)
                        ? (IEnumerable<ControllerGroup>)ControllerGroups : new[] { ControllerGroups[CurrentGroupIndex] };
 
             Color leftColour = Properties.Settings.Default.leftBorderColour;
@@ -262,6 +262,10 @@ namespace TTMulti
                     {
                         if (currentMode == ControllerMode.Multi)
                         {
+                            /*if (Properties.Settings.Default.forceMirrorControlAllGroups)
+                            {
+                                Properties.Settings.Default.controlAllGroupsAtOnce = true;
+                            }*/
                             CurrentMode = ControllerMode.Mirror;
                         }
                         else
@@ -350,7 +354,7 @@ namespace TTMulti
                 {
                     if (currentMode == ControllerMode.Mirror)
                     {
-                        if (Properties.Settings.Default.controlAllGroupsAtOnce)
+                        if (Properties.Settings.Default.controlAllGroupsAtOnce || Properties.Settings.Default.forceMirrorControlAllGroups)
                         {
                             foreach (var group in ControllerGroups)
                             {

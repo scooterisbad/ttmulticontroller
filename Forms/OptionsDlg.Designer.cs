@@ -48,25 +48,18 @@ namespace TTMulti.Forms
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.keyPicker3 = new TTMulti.Controls.KeyPicker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.keyPicker1 = new TTMulti.Controls.KeyPicker();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.keyPicker4 = new TTMulti.Controls.KeyPicker();
             this.label11 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.keyPicker2 = new TTMulti.Controls.KeyPicker();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.keyPicker5 = new TTMulti.Controls.KeyPicker();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -80,11 +73,19 @@ namespace TTMulti.Forms
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.CheckboxForceControlAllGroups = new System.Windows.Forms.CheckBox();
+            this.keyPicker3 = new TTMulti.Controls.KeyPicker();
+            this.keyPicker1 = new TTMulti.Controls.KeyPicker();
+            this.keyPicker4 = new TTMulti.Controls.KeyPicker();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.keyPicker2 = new TTMulti.Controls.KeyPicker();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.keyPicker5 = new TTMulti.Controls.KeyPicker();
             this.controlAllGroupsChk = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.tabControl1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -97,12 +98,12 @@ namespace TTMulti.Forms
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // okBtn
@@ -306,18 +307,6 @@ namespace TTMulti.Forms
             this.label1.Text = "This key will toggle the option to \'Control all groups at once in multi-mode\', fo" +
     "und in the Other tab.";
             // 
-            // keyPicker3
-            // 
-            this.keyPicker3.ChosenKey = System.Windows.Forms.Keys.None;
-            this.keyPicker3.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.controlAllGroupsKeyCode;
-            this.keyPicker3.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "controlAllGroupsKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keyPicker3.Location = new System.Drawing.Point(7, 35);
-            this.keyPicker3.Margin = new System.Windows.Forms.Padding(4);
-            this.keyPicker3.MinimumSize = new System.Drawing.Size(40, 20);
-            this.keyPicker3.Name = "keyPicker3";
-            this.keyPicker3.Size = new System.Drawing.Size(150, 20);
-            this.keyPicker3.TabIndex = 12;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label4);
@@ -341,18 +330,6 @@ namespace TTMulti.Forms
             this.label4.Text = "This key is used to change from multi-mode to mirror-mode and back. It also activ" +
     "ates the multicontroller when you have a Toontown window active. ";
             // 
-            // keyPicker1
-            // 
-            this.keyPicker1.ChosenKey = System.Windows.Forms.Keys.Oemtilde;
-            this.keyPicker1.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.modeKeyCode;
-            this.keyPicker1.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "modeKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keyPicker1.Location = new System.Drawing.Point(7, 48);
-            this.keyPicker1.Margin = new System.Windows.Forms.Padding(4);
-            this.keyPicker1.MinimumSize = new System.Drawing.Size(40, 20);
-            this.keyPicker1.Name = "keyPicker1";
-            this.keyPicker1.Size = new System.Drawing.Size(150, 20);
-            this.keyPicker1.TabIndex = 12;
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.keyPicker4);
@@ -368,19 +345,6 @@ namespace TTMulti.Forms
             this.tabPage5.TabIndex = 5;
             this.tabPage5.Text = "Keep-Alive";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // keyPicker4
-            // 
-            this.keyPicker4.ChosenKey = System.Windows.Forms.Keys.None;
-            this.keyPicker4.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.toggleKeepAliveKeyCode;
-            this.keyPicker4.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "toggleKeepAliveKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keyPicker4.Location = new System.Drawing.Point(134, 53);
-            this.keyPicker4.Margin = new System.Windows.Forms.Padding(4);
-            this.keyPicker4.MinimumSize = new System.Drawing.Size(40, 20);
-            this.keyPicker4.Name = "keyPicker4";
-            this.keyPicker4.Size = new System.Drawing.Size(150, 20);
-            this.keyPicker4.TabIndex = 16;
-            this.toolTip1.SetToolTip(this.keyPicker4, "This is the key that will be pressed periodically to keep your toons awake.");
             // 
             // label11
             // 
@@ -401,32 +365,6 @@ namespace TTMulti.Forms
             this.label2.Size = new System.Drawing.Size(82, 13);
             this.label2.TabIndex = 14;
             this.label2.Text = "Keep-Alive Key:";
-            // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Checked = global::TTMulti.Properties.Settings.Default.disableKeepAlive;
-            this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TTMulti.Properties.Settings.Default, "disableKeepAlive", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkBox4.Location = new System.Drawing.Point(6, 6);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(115, 17);
-            this.checkBox4.TabIndex = 3;
-            this.checkBox4.Text = "Disable Keep-Alive";
-            this.toolTip1.SetToolTip(this.checkBox4, "If checked, your toons will no longer be kept awake automatically.");
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
-            // keyPicker2
-            // 
-            this.keyPicker2.ChosenKey = System.Windows.Forms.Keys.Home;
-            this.keyPicker2.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.keepAliveKeyCode;
-            this.keyPicker2.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "keepAliveKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keyPicker2.Location = new System.Drawing.Point(134, 29);
-            this.keyPicker2.Margin = new System.Windows.Forms.Padding(4);
-            this.keyPicker2.MinimumSize = new System.Drawing.Size(40, 20);
-            this.keyPicker2.Name = "keyPicker2";
-            this.keyPicker2.Size = new System.Drawing.Size(150, 20);
-            this.keyPicker2.TabIndex = 13;
-            this.toolTip1.SetToolTip(this.keyPicker2, "This is the key that will be pressed periodically to keep your toons awake.");
             // 
             // tabPage1
             // 
@@ -482,15 +420,6 @@ namespace TTMulti.Forms
             this.label8.TabIndex = 15;
             this.label8.Text = "ms";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TTMulti.Properties.Settings.Default, "multiClickDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.numericUpDown1.Location = new System.Drawing.Point(7, 34);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(62, 20);
-            this.numericUpDown1.TabIndex = 14;
-            this.numericUpDown1.Value = global::TTMulti.Properties.Settings.Default.multiClickDelay;
-            // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -523,18 +452,6 @@ namespace TTMulti.Forms
             this.label7.Size = new System.Drawing.Size(569, 14);
             this.label7.TabIndex = 13;
             this.label7.Text = "The key used to toggle multi click mode";
-            // 
-            // keyPicker5
-            // 
-            this.keyPicker5.ChosenKey = System.Windows.Forms.Keys.None;
-            this.keyPicker5.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.multiClickKeyCode;
-            this.keyPicker5.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "multiClickKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.keyPicker5.Location = new System.Drawing.Point(7, 34);
-            this.keyPicker5.Margin = new System.Windows.Forms.Padding(4);
-            this.keyPicker5.MinimumSize = new System.Drawing.Size(40, 20);
-            this.keyPicker5.Name = "keyPicker5";
-            this.keyPicker5.Size = new System.Drawing.Size(150, 20);
-            this.keyPicker5.TabIndex = 12;
             // 
             // tabPage4
             // 
@@ -677,6 +594,7 @@ namespace TTMulti.Forms
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.CheckboxForceControlAllGroups);
             this.tabPage2.Controls.Add(this.controlAllGroupsChk);
             this.tabPage2.Controls.Add(this.checkBox3);
             this.tabPage2.Controls.Add(this.checkBox2);
@@ -687,6 +605,102 @@ namespace TTMulti.Forms
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Other";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // CheckboxForceControlAllGroups
+            // 
+            this.CheckboxForceControlAllGroups.AutoSize = true;
+            this.CheckboxForceControlAllGroups.Checked = global::TTMulti.Properties.Settings.Default.forceMirrorControlAllGroups;
+            this.CheckboxForceControlAllGroups.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TTMulti.Properties.Settings.Default, "forceMirrorControlAllGroups", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.CheckboxForceControlAllGroups.Location = new System.Drawing.Point(6, 78);
+            this.CheckboxForceControlAllGroups.Name = "CheckboxForceControlAllGroups";
+            this.CheckboxForceControlAllGroups.Size = new System.Drawing.Size(204, 17);
+            this.CheckboxForceControlAllGroups.TabIndex = 3;
+            this.CheckboxForceControlAllGroups.Text = "Force control all groups in mirror mode";
+            this.CheckboxForceControlAllGroups.UseVisualStyleBackColor = true;
+            // 
+            // keyPicker3
+            // 
+            this.keyPicker3.ChosenKey = System.Windows.Forms.Keys.None;
+            this.keyPicker3.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.controlAllGroupsKeyCode;
+            this.keyPicker3.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "controlAllGroupsKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keyPicker3.Location = new System.Drawing.Point(7, 35);
+            this.keyPicker3.Margin = new System.Windows.Forms.Padding(4);
+            this.keyPicker3.MinimumSize = new System.Drawing.Size(40, 20);
+            this.keyPicker3.Name = "keyPicker3";
+            this.keyPicker3.Size = new System.Drawing.Size(150, 20);
+            this.keyPicker3.TabIndex = 12;
+            // 
+            // keyPicker1
+            // 
+            this.keyPicker1.ChosenKey = System.Windows.Forms.Keys.Oemtilde;
+            this.keyPicker1.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.modeKeyCode;
+            this.keyPicker1.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "modeKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keyPicker1.Location = new System.Drawing.Point(7, 48);
+            this.keyPicker1.Margin = new System.Windows.Forms.Padding(4);
+            this.keyPicker1.MinimumSize = new System.Drawing.Size(40, 20);
+            this.keyPicker1.Name = "keyPicker1";
+            this.keyPicker1.Size = new System.Drawing.Size(150, 20);
+            this.keyPicker1.TabIndex = 12;
+            // 
+            // keyPicker4
+            // 
+            this.keyPicker4.ChosenKey = System.Windows.Forms.Keys.None;
+            this.keyPicker4.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.toggleKeepAliveKeyCode;
+            this.keyPicker4.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "toggleKeepAliveKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keyPicker4.Location = new System.Drawing.Point(134, 53);
+            this.keyPicker4.Margin = new System.Windows.Forms.Padding(4);
+            this.keyPicker4.MinimumSize = new System.Drawing.Size(40, 20);
+            this.keyPicker4.Name = "keyPicker4";
+            this.keyPicker4.Size = new System.Drawing.Size(150, 20);
+            this.keyPicker4.TabIndex = 16;
+            this.toolTip1.SetToolTip(this.keyPicker4, "This is the key that will be pressed periodically to keep your toons awake.");
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Checked = global::TTMulti.Properties.Settings.Default.disableKeepAlive;
+            this.checkBox4.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::TTMulti.Properties.Settings.Default, "disableKeepAlive", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkBox4.Location = new System.Drawing.Point(6, 6);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(115, 17);
+            this.checkBox4.TabIndex = 3;
+            this.checkBox4.Text = "Disable Keep-Alive";
+            this.toolTip1.SetToolTip(this.checkBox4, "If checked, your toons will no longer be kept awake automatically.");
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // keyPicker2
+            // 
+            this.keyPicker2.ChosenKey = System.Windows.Forms.Keys.Home;
+            this.keyPicker2.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.keepAliveKeyCode;
+            this.keyPicker2.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "keepAliveKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keyPicker2.Location = new System.Drawing.Point(134, 29);
+            this.keyPicker2.Margin = new System.Windows.Forms.Padding(4);
+            this.keyPicker2.MinimumSize = new System.Drawing.Size(40, 20);
+            this.keyPicker2.Name = "keyPicker2";
+            this.keyPicker2.Size = new System.Drawing.Size(150, 20);
+            this.keyPicker2.TabIndex = 13;
+            this.toolTip1.SetToolTip(this.keyPicker2, "This is the key that will be pressed periodically to keep your toons awake.");
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.DataBindings.Add(new System.Windows.Forms.Binding("Value", global::TTMulti.Properties.Settings.Default, "multiClickDelay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.numericUpDown1.Location = new System.Drawing.Point(7, 34);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(62, 20);
+            this.numericUpDown1.TabIndex = 14;
+            this.numericUpDown1.Value = global::TTMulti.Properties.Settings.Default.multiClickDelay;
+            // 
+            // keyPicker5
+            // 
+            this.keyPicker5.ChosenKey = System.Windows.Forms.Keys.None;
+            this.keyPicker5.ChosenKeyCode = global::TTMulti.Properties.Settings.Default.multiClickKeyCode;
+            this.keyPicker5.DataBindings.Add(new System.Windows.Forms.Binding("ChosenKeyCode", global::TTMulti.Properties.Settings.Default, "multiClickKeyCode", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.keyPicker5.Location = new System.Drawing.Point(7, 34);
+            this.keyPicker5.Margin = new System.Windows.Forms.Padding(4);
+            this.keyPicker5.MinimumSize = new System.Drawing.Size(40, 20);
+            this.keyPicker5.Name = "keyPicker5";
+            this.keyPicker5.Size = new System.Drawing.Size(150, 20);
+            this.keyPicker5.TabIndex = 12;
             // 
             // controlAllGroupsChk
             // 
@@ -762,7 +776,6 @@ namespace TTMulti.Forms
             this.tabPage1.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
@@ -770,6 +783,7 @@ namespace TTMulti.Forms
             this.groupBox6.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -829,5 +843,6 @@ namespace TTMulti.Forms
         private KeyPicker keyPicker4;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.CheckBox CheckboxForceControlAllGroups;
     }
 }
